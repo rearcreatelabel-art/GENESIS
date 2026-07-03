@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GENESIS XR LIVE PLAYER / 360 PHANTOM SPEAKER</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(circle at top,#173f78,#000 58%)}main{max-width:720px;margin:auto;padding:16px 14px 100px}.card{background:rgba(7,12,22,.94);border:1px solid rgba(255,255,255,.14);border-radius:26px;padding:18px;margin:0 0 14px;box-shadow:0 24px 80px #000}.k{color:#8bdcff;font-size:11px;font-weight:900;letter-spacing:.16em}h1{font-size:28px;margin:4px 0}h2{font-size:14px;color:#dbeafe;letter-spacing:.14em}.hero{font-weight:900;color:#fff}p{color:#dce7f8;line-height:1.7;font-size:13px}button,label{display:block;width:100%;border:1px solid rgba(255,255,255,.15);border-radius:18px;background:linear-gradient(135deg,rgba(52,124,255,.58),rgba(139,220,255,.18));color:#fff;font-weight:900;padding:15px 12px;margin:10px 0;text-align:center}button:active,label:active{transform:scale(.985)}input[type=file]{display:none}video,canvas{width:100%;border-radius:20px;background:#000;border:1px solid rgba(255,255,255,.12)}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row button{margin:0}.map{position:relative;aspect-ratio:1/1;border-radius:28px;border:1px solid rgba(139,220,255,.22);background:radial-gradient(circle,rgba(139,220,255,.16),transparent 32%),rgba(255,255,255,.04);margin-top:12px;overflow:hidden}.map:before{content:"";position:absolute;inset:13%;border:1px solid rgba(139,220,255,.22);border-radius:50%}.map:after{content:"LISTENER";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:10px 12px;font-size:11px;font-weight:900}.sp{position:absolute;width:68px;height:68px;margin:-34px 0 0 -34px;border:1px solid rgba(255,255,255,.15);border-radius:21px;background:rgba(139,220,255,.12);display:grid;place-items:center;text-align:center;font-size:10px;font-weight:900;line-height:1.15}.sp.on{background:rgba(255,210,90,.35);box-shadow:0 0 45px rgba(255,210,90,.42),0 0 28px rgba(139,220,255,.34);transform:scale(1.07)}.meters{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.m{background:rgba(255,255,255,.05);border-radius:14px;padding:10px;font-size:11px}.m b{display:block;color:#8bdcff;margin-top:4px}.sl label{display:grid;grid-template-columns:1fr auto;gap:8px;color:#fff;background:transparent;border:0;padding:0;margin:12px 0;text-align:left}.sl input{grid-column:1/-1;width:100%;accent-color:#8bdcff}.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#000;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:10px 14px;opacity:0;white-space:nowrap}.show{opacity:1}.shake{animation:shake .3s linear}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-3px)}}.nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:min(690px,calc(100% - 24px));display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:8px}.nav a{text-decoration:none;color:#cbd5e1;text-align:center;font-size:11px;font-weight:900;padding:10px}@media(max-width:470px){.row{grid-template-columns:1fr}.meters{grid-template-columns:repeat(2,1fr)}.sp{width:58px;height:58px;margin:-29px 0 0 -29px;font-size:9px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast">GENESIS READY</div>
+<main>
+<section class="card" id="top">
+<div class="k">URL ONLY / 360 PHANTOM SPEAKER SYSTEM</div>
+<h1>GENESIS XR LIVE PLAYER</h1>
+<h2>GENESIS SONIC CORE</h2>
+<p class="hero">スマホとイヤホンだけで、周囲に仮想スピーカーを配置する。</p>
+<p>動画音声を6方向のファントムスピーカーへ分配し、左右・前後・奥行き・会場残響を合成します。</p>
+</section>
+
+<section class="card" id="video">
+<div class="k">STEP 1 / VIDEO SOURCE</div>
+<label>動画を差し込む / VIDEO UPLOAD<input id="file" type="file" accept="video/*"></label>
+<video id="v" controls playsinline></video>
+<p id="log">動画待機中</p>
+</section>
+
+<section class="card" id="speaker">
+<div class="k">STEP 2 / PHANTOM SPEAKER ARRAY</div>
+<div class="map">
+<div class="sp" id="FL" style="left:22%;top:24%">FRONT<br>LEFT</div>
+<div class="sp" id="FC" style="left:50%;top:12%">FRONT<br>CENTER</div>
+<div class="sp" id="FR" style="left:78%;top:24%">FRONT<br>RIGHT</div>
+<div class="sp" id="RL" style="left:22%;top:76%">REAR<br>LEFT</div>
+<div class="sp" id="RC" style="left:50%;top:88%">REAR<br>CENTER</div>
+<div class="sp" id="RR" style="left:78%;top:76%">REAR<br>RIGHT</div>
+</div>
+<button id="on">360° PHANTOM SPEAKER ON</button>
+<div class="row">
+<button id="front">FRONT STAGE</button>
+<button id="rear">REAR ECHO</button>
+<button id="orbit">ORBIT 360</button>
+<button id="stadium">STADIUM WIDE</button>
+</div>
+<button id="bass">BASS DROP</button>
+<div class="sl">
+<label>Phantom Blend <b id="blendV">86</b><input id="blend" type="range" min="0" max="100" value="86"></label>
+<label>Stage Width <b id="widthV">92</b><input id="width" type="range" min="0" max="100" value="92"></label>
+<label>Rear Depth <b id="rearV">72</b><input id="rear" type="range" min="0" max="100" value="72"></label>
+<label>Hall Air <b id="hallV">60</b><input id="hall" type="range" min="0" max="100" value="60"></label>
+<label>Orbit Speed <b id="speedV">58</b><input id="speed" type="range" min="0" max="100" value="58"></label>
+</div>
+<div class="meters"><div class="m">MODE<b id="mode">READY</b></div><div class="m">ACTIVE<b id="active">0/6</b></div><div class="m">ORBIT<b id="orb">OFF</b></div><div class="m">BASS<b id="bassM">0%</b></div></div>
+</section>
+
+<section class="card" id="live">
+<div class="k">STEP 3 / XR LIVE VENUE</div>
+<canvas id="c" width="760" height="540"></canvas>
+<button id="start">LIVE START / 360°会場に入る</button>
+<button id="test">SPEAKER TEST 360°</button>
+<p>イヤホン・ヘッドホン推奨。スマホスピーカーより360°感が分かりやすくなります。</p>
+</section>
+</main>
+<nav class="nav"><a href="#video">VIDEO</a><a href="#speaker">SPEAKER</a><a href="#live">LIVE</a><a href="#top">TOP</a></nav>
+
+<script>
+const $=id=>document.getElementById(id), toast=m=>{let t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1300)};
+const v=$("v"), c=$("c"), x=c.getContext("2d"), ids=["FL","FC","FR","RL","RC","RR"];
+let ac,src,input,master,an,rev,revG,fb,url,ready=false,phantom=false,live=false,orbit=false,test=false,t0=performance.now(),data=new Uint8Array(128),boost=0,last=0;
+let ch={}, s={blend:86,width:92,rear:72,hall:60,speed:58,mode:"READY"};
+function vibe(p){if(navigator.vibrate)navigator.vibrate(p)}
+function labels(){["blend","width","rear","hall","speed"].forEach(id=>$(id+"V").textContent=s[id]);$("mode").textContent=s.mode;$("orb").textContent=orbit?"ON":"OFF"}
+function active(a){ids.forEach(id=>$(id).classList.toggle("on",a.includes(id)));$("active").textContent=a.length+"/6"}
+["blend","width","rear","hall","speed"].forEach(id=>$(id).oninput=()=>{s[id]=+$(id).value;labels();apply()});
+async function init(){
+ if(ac)return;
+ ac=new(window.AudioContext||window.webkitAudioContext)(); an=ac.createAnalyser(); an.fftSize=256; input=ac.createGain(); master=ac.createGain();
+ src=ac.createMediaElementSource(v); src.connect(input);
+ const cfg={FL:[-.75,.012,.28],FC:[0,.006,.34],FR:[.75,.012,.28],RL:[-.52,.055,.18],RC:[0,.075,.15],RR:[.52,.055,.18]};
+ ids.forEach(id=>{let p=ac.createStereoPanner(),d=ac.createDelay(.5),g=ac.createGain();input.connect(d);d.connect(p);p.connect(g);g.connect(master);ch[id]={p,d,g,cfg:cfg[id]}});
+ rev=ac.createDelay(1);revG=ac.createGain();fb=ac.createGain();input.connect(rev);rev.connect(fb);fb.connect(rev);rev.connect(revG);revG.connect(master);
+ master.connect(an);an.connect(ac.destination);apply()
+}
+function apply(){
+ if(!ac)return; master.gain.value=.92; rev.delayTime.value=.08+s.hall/100*.25; revG.gain.value=s.hall/100*.34; fb.gain.value=s.hall/100*.20;
+ ids.forEach(id=>{let o=ch[id],rear=id[0]=="R";o.p.pan.value=o.cfg[0]*(s.width/100);o.d.delayTime.value=o.cfg[1]+(rear?s.rear/100*.08:0);o.g.gain.value=o.cfg[2]*(s.blend/100)*(rear?(.55+s.rear/100*.95):1)})
+}
+$("file").onchange=e=>{let f=e.target.files[0];if(!f)return;if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);v.src=url;ready=true;$("log").textContent="動画読み込み完了："+f.name;toast("VIDEO READY");vibe([30,30,70])};
+$("on").onclick=async()=>{if(!ready){toast("先に動画を差し込んでください");return}await init();await ac.resume();phantom=true;orbit=true;s.mode="PHANTOM";labels();active(ids);try{await v.play()}catch(e){}toast("PHANTOM SPEAKER ON");vibe([40,30,90])};
+$("front").onclick=()=>{s.mode="FRONT";orbit=false;apply();["FL","FC","FR"].forEach(id=>ch[id]&&(ch[id].g.gain.value*=1.9));["RL","RC","RR"].forEach(id=>ch[id]&&(ch[id].g.gain.value*=.18));labels();active(["FL","FC","FR"]);toast("FRONT STAGE")};
+$("rear").onclick=()=>{s.mode="REAR";orbit=false;apply();["RL","RC","RR"].forEach(id=>ch[id]&&(ch[id].g.gain.value*=2));labels();active(["RL","RC","RR"]);toast("REAR ECHO")};
+$("orbit").onclick=()=>{orbit=!orbit;s.mode=orbit?"ORBIT":"PHANTOM";apply();labels();active(ids);toast(s.mode)};
+$("stadium").onclick=()=>{$("width").value=100;$("rear").value=92;$("hall").value=78;s.width=100;s.rear=92;s.hall=78;s.mode="STADIUM";orbit=true;labels();apply();active(ids);toast("STADIUM WIDE")};
+$("bass").onclick=()=>{boost=2;vibe([60,35,130,50,220]);$("live").classList.add("shake");setTimeout(()=>{$("live").classList.remove("shake");boost=0},650);toast("BASS DROP")};
+$("start").onclick=async()=>{if(!ready){toast("先に動画を差し込んでください");return}await init();await ac.resume();phantom=true;live=true;orbit=true;s.mode="XR LIVE";labels();apply();active(ids);try{await v.play()}catch(e){}toast("XR LIVE START");vibe([45,35,45,35,150])};
+$("test").onclick=async()=>{await init();await ac.resume();test=true;orbit=false;s.mode="TEST";labels();let i=0;let timer=setInterval(()=>{let id=ids[i%ids.length];ids.forEach(k=>ch[k].g.gain.value=k===id ? .9 : .02);active([id]);vibe(30);i++;if(i>11){clearInterval(timer);test=false;s.mode="PHANTOM";apply();active(ids);labels()}},520);toast("SPEAKER TEST 360°")};
+function avg(a,s,e){let v=0;for(let i=s;i<e;i++)v+=a[i];return v/(e-s)/255}
+function draw(now){requestAnimationFrame(draw);let W=c.width,H=c.height,t=(now-t0)/1000;if(an)an.getByteFrequencyData(data);else data.fill(28);let en=avg(data,0,128),bass=avg(data,0,22);$("bassM").textContent=Math.round(bass*100)+"%";
+ if(phantom&&orbit&&ch.FL&&!test){let sp=s.speed/100*1.4+.2;ids.forEach((id,i)=>{let amp=(Math.sin(t*sp+i*Math.PI*2/ids.length)*.5+.5);let rear=id[0]=="R";ch[id].g.gain.value=ch[id].cfg[2]*(.25+amp*.95)*(s.blend/100)*(rear?(.55+s.rear/100*.95):1)});active(ids.filter((id,i)=>Math.sin(t*sp+i*Math.PI*2/ids.length)>.25))}
+ if(live&&bass>.50&&now-last>700){last=now;boost=.85;vibe([45,28,90]);setTimeout(()=>boost=0,220)}
+ x.fillStyle="#02050b";x.fillRect(0,0,W,H);let g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(20,70,160,.48)");g.addColorStop(1,"#000");x.fillStyle=g;x.fillRect(0,0,W,H);
+ for(let i=0;i<16;i++){x.beginPath();x.moveTo(W*i/15,0);x.lineTo(W/2+Math.sin(t+i)*245,H*.60);x.strokeStyle="rgba(139,220,255,"+(.08+en*.34)+")";x.lineWidth=7+en*25+boost*12;x.stroke()}
+ let cx=W/2,cy=H*.39,rx=210+s.width*.75,ry=72+s.rear*.45;x.strokeStyle="rgba(139,220,255,.28)";x.lineWidth=2;for(let r=1;r<=3;r++){x.beginPath();x.ellipse(cx,cy,rx*r/3,ry*r/3,0,0,Math.PI*2);x.stroke()}
+ ids.forEach((id,i)=>{let ang=-Math.PI/2+i*Math.PI*2/ids.length,px=cx+Math.cos(ang)*rx*.82,py=cy+Math.sin(ang)*ry*.82,on=$(id).classList.contains("on"),rad=on?18+en*22+boost*8:10+en*8;x.fillStyle=on?"rgba(255,210,90,.85)":"rgba(139,220,255,.65)";x.beginPath();x.arc(px,py,rad,0,Math.PI*2);x.fill();x.fillStyle="#fff";x.font="900 11px system-ui";x.textAlign="center";x.fillText(id,px,py+4)});
+ x.fillStyle="rgba(255,255,255,.065)";for(let i=0;i<130;i++){x.beginPath();x.arc((i*47+t*20)%(W+60)-30,H*.73+(i%8)*17+Math.sin(t+i)*3,1.8+en*3+boost,0,Math.PI*2);x.fill()}
+ x.fillStyle="rgba(0,0,0,.72)";x.fillRect(W*.1,H*.51,W*.8,86);x.fillStyle="#fff";x.textAlign="center";x.font="900 23px system-ui";x.fillText("360° PHANTOM SPEAKER SYSTEM",W/2,H*.58);x.font="900 14px system-ui";x.fillStyle="#8bdcff";x.fillText("FRONT / REAR / ORBIT / STADIUM WIDE",W/2,H*.65);
+ let bars=32,bw=13,gap=8,base=H-38,s0=(W-bars*(bw+gap))/2;for(let i=0;i<bars;i++){let a=(data[Math.floor(i/bars*data.length)]||0)/255,bh=18+a*178+boost*24;x.fillStyle="hsl("+(205+i*5+t*18)+",100%,65%)";x.fillRect(s0+i*(bw+gap),base-bh,bw,bh)}
+}labels();requestAnimationFrame(draw);
+</script>
+</body>
+</html>
